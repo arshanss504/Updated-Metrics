@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'otel-collector'
+    static_configs:
+      - targets: ['otel-collector:9464']  # Change to localhost if needed
+    # Optionally, remove or modify the metric relabeling rule:
+    # metric_relabel_configs:
+    #   - source_labels: [__name__]
+    #     regex: '.*'  # This will keep all metrics
+    #     action: keep
+
+
+
+#Be cautious with regex config, it may exclude some metrics that dont follow the regex pattern or regex label. I faced the same problem and though my otel-collector was collecting and exporting the metrics, I couldnt see them in grafana or prometheus 9090
